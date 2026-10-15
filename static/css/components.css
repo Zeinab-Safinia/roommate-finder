@@ -1,0 +1,463 @@
+/* ==========================================================================
+   کامپوننت‌های قابل‌استفادهٔ مجدد
+   ========================================================================== */
+
+/* ---------- هدر / نوار بالای سایت ---------- */
+
+.site-header {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.site-header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: var(--space-4);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-bold);
+  color: #fff;
+}
+
+.brand:hover { text-decoration: none; opacity: 0.9; }
+
+.brand-mark {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-sm);
+  background: var(--color-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: var(--fw-bold);
+  color: var(--color-primary-dark);
+  font-size: var(--fs-md);
+}
+
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+}
+
+.main-nav a {
+  color: rgba(255,255,255,0.85);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+}
+
+.main-nav a:hover, .main-nav a.is-active {
+  color: #fff;
+  text-decoration: none;
+}
+
+/* ---------- فوتر ---------- */
+
+.site-footer {
+  background: var(--color-primary-dark);
+  color: rgba(255,255,255,0.7);
+  padding-block: var(--space-5);
+  font-size: var(--fs-sm);
+  margin-top: var(--space-8);
+}
+
+.site-footer .container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+/* ---------- دکمه‌ها ---------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-md);
+  font-family: var(--font-main);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color: #fff;
+}
+.btn-primary:hover { background: var(--color-primary-dark); text-decoration: none; }
+
+.btn-accent {
+  background: var(--color-accent);
+  color: #fff;
+}
+.btn-accent:hover { background: var(--color-accent-dark); text-decoration: none; }
+
+.btn-outline {
+  background: transparent;
+  border-color: var(--color-border);
+  color: var(--color-text);
+}
+.btn-outline:hover { border-color: var(--color-primary); color: var(--color-primary); text-decoration: none; }
+
+.btn-danger-outline {
+  background: transparent;
+  border-color: var(--color-danger);
+  color: var(--color-danger);
+}
+.btn-danger-outline:hover { background: var(--color-danger); color: #fff; text-decoration: none; }
+
+.btn-block { width: 100%; }
+.btn-sm { padding: var(--space-2) var(--space-4); font-size: var(--fs-xs); }
+
+/* ---------- کارت پایه ---------- */
+
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ---------- فرم‌ها ---------- */
+
+.form-group { margin-bottom: var(--space-5); }
+
+.form-label {
+  display: block;
+  margin-bottom: var(--space-2);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  color: var(--color-text);
+}
+
+.form-hint {
+  font-size: var(--fs-xs);
+  color: var(--color-text-muted);
+  margin-top: var(--space-1);
+}
+
+.form-control {
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  font-family: var(--font-main);
+  font-size: var(--fs-base);
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  transition: border-color var(--transition-fast);
+}
+
+.form-control:focus {
+  border-color: var(--color-primary);
+  outline: none;
+}
+
+.form-range {
+  width: 100%;
+  accent-color: var(--color-primary);
+}
+
+.form-scale {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--fs-xs);
+  color: var(--color-text-muted);
+  margin-top: var(--space-1);
+}
+
+.auth-card {
+  max-width: 420px;
+  margin-inline: auto;
+}
+
+/* ---------- نوار امتیاز سازگاری ---------- */
+/* هرجا لازم بود سطح سازگاری یک نفر یا یک گروه نمایش داده شود، از این کامپوننت استفاده کن */
+
+.compat {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.compat-track {
+  flex: 1;
+  height: 10px;
+  border-radius: var(--radius-pill);
+  background: var(--color-surface-alt);
+  overflow: hidden;
+}
+
+.compat-fill {
+  height: 100%;
+  border-radius: var(--radius-pill);
+  background: var(--color-compat-high);
+}
+
+.compat[data-level="mid"] .compat-fill { background: var(--color-compat-mid); }
+.compat[data-level="low"] .compat-fill { background: var(--color-compat-low); }
+
+.compat-value {
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-md);
+  color: var(--color-primary);
+  min-width: 3.2em;
+  text-align: left;
+}
+
+.compat[data-level="mid"] .compat-value { color: var(--color-accent-dark); }
+.compat[data-level="low"] .compat-value { color: var(--color-danger); }
+
+/* ---------- کارت گروه پیشنهادی ---------- */
+
+.group-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.group-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-3);
+  min-width: 0;
+}
+
+.group-card__header > div {
+  min-width: 0;
+}
+
+.group-card__title {
+  font-size: var(--fs-md);
+  font-weight: var(--fw-semibold);
+  color: var(--color-text);
+  margin: 0;
+  overflow-wrap: break-word;
+}
+
+.group-card__meta {
+  font-size: var(--fs-xs);
+  color: var(--color-text-muted);
+  margin-top: var(--space-1);
+}
+
+.member-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.member-chip {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  background: var(--color-surface-alt);
+  border-radius: var(--radius-pill);
+  padding: var(--space-1) var(--space-3) var(--space-1) var(--space-2);
+  font-size: var(--fs-xs);
+}
+
+.member-chip__avatar {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: var(--fw-bold);
+  font-size: 0.65rem;
+}
+
+.member-chip--empty {
+  background: transparent;
+  border: 1px dashed var(--color-border);
+  color: var(--color-text-muted);
+}
+
+.group-card__reasons {
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+  margin: 0;
+  padding-inline-start: var(--space-5);
+}
+
+.group-card__actions {
+  display: flex;
+  gap: var(--space-3);
+  margin-top: auto;
+}
+
+.group-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--space-5);
+}
+
+/* ---------- نشان‌ها (badge) ---------- */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-pill);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-medium);
+}
+
+.badge-pending { background: rgba(201,152,46,0.15); color: var(--color-accent-dark); }
+.badge-accepted { background: rgba(63,122,94,0.15); color: var(--color-success); }
+.badge-rejected { background: rgba(181,83,60,0.15); color: var(--color-danger); }
+
+/* ---------- صفحه‌بندی سؤالات پرسش‌نامه ---------- */
+
+.progress-track {
+  height: 6px;
+  border-radius: var(--radius-pill);
+  background: var(--color-surface-alt);
+  margin-bottom: var(--space-6);
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--color-accent);
+  border-radius: var(--radius-pill);
+}
+
+.question-block {
+  margin-bottom: var(--space-6);
+}
+
+.question-block__title {
+  font-size: var(--fs-md);
+  font-weight: var(--fw-semibold);
+  margin-bottom: var(--space-3);
+}
+
+/* ---------- لیست درخواست‌ها ---------- */
+
+.request-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  margin-bottom: var(--space-3);
+}
+
+.request-row__info {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.request-row__actions { display: flex; gap: var(--space-2); }
+
+/* ---------- گفتگو ---------- */
+
+.chat-window {
+  display: flex;
+  flex-direction: column;
+  height: 520px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  overflow: hidden;
+}
+
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.chat-bubble {
+  max-width: 70%;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-alt);
+  font-size: var(--fs-sm);
+  align-self: flex-start;
+}
+
+.chat-bubble--me {
+  background: var(--color-primary-light);
+  align-self: flex-end;
+}
+
+.chat-bubble__meta {
+  display: block;
+  margin-top: var(--space-1);
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+}
+
+.chat-input-row {
+  display: flex;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border-top: 1px solid var(--color-border);
+}
+
+.chat-input-row .form-control { flex: 1; }
+
+/* ---------- بنر خالی/راهنما ---------- */
+
+.empty-state {
+  text-align: center;
+  padding: var(--space-8) var(--space-5);
+  color: var(--color-text-muted);
+}
+
+.empty-state h3 { color: var(--color-text); }
+
+/* ---------- پیام‌های سیستمی (alerts) ---------- */
+
+.alert {
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  font-size: var(--fs-sm);
+  margin-bottom: var(--space-5);
+}
+
+.alert-info { background: var(--color-primary-light); color: var(--color-primary-dark); }
+.alert-warning { background: rgba(201,152,46,0.15); color: var(--color-accent-dark); }
+.alert-danger { background: rgba(181,83,60,0.12); color: var(--color-danger); }
+
+/* ---------- ریسپانسیو ---------- */
+
+@media (max-width: 640px) {
+  .main-nav { gap: var(--space-3); }
+  .group-grid { grid-template-columns: 1fr; }
+  .request-row { flex-direction: column; align-items: flex-start; }
+}

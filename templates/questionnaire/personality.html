@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% comment %}
+  پرسش‌نامهٔ شخصیتی (مقیاس پنج‌عاملی / TIPI).
+  برخلاف پرسش‌نامهٔ سبک زندگی، این سؤال‌ها یک مقیاس علمی استاندارد و ثابت
+  هستند و نباید توسط ادمین تغییر کنن؛ به همین خاطر در بک‌اند با یه فلگ
+  is_locked=True نگه داشته می‌شن. ولی از نظر این تمپلیت، باز هم داده‌ها
+  از همون جدول Question میان (category="personality")، فقط راه رندرشون
+  یکم فرق داره چون پاسخ این نوع سؤال‌ها معمولاً یه طیف "کاملاً مخالفم" تا
+  "کاملاً موافقم" هست (مقیاس لیکرت ۷تایی در TIPI استاندارد)، نه یه رنج آزاد.
+{% endcomment %}
+
+{% block title %}پرسش‌نامه شخصیتی | هم‌اتاقی‌یاب{% endblock %}
+
+{% block content %}
+<div class="container container--narrow" style="padding: 0;">
+
+  {% if is_onboarding %}
+    <div class="progress-track">
+      <div class="progress-fill" style="width: 90%;"></div>
+    </div>
+    <p class="form-hint" style="margin-bottom: var(--space-6);">قدم ۵ از ۵</p>
+  {% endif %}
+
+  <h2>پرسش‌نامه شخصیتی</h2>
+  <p class="text-muted">
+    با هر جمله چقدر موافقی؟ این یک آزمون استاندارد شخصیت‌شناسی است و فقط
+    برای سنجش سازگاری هم‌اتاقی استفاده می‌شود؛ هیچ تشخیص روان‌شناختی ارائه نمی‌دهد.
+  </p>
+
+  <form method="post">
+    {% csrf_token %}
+
+    <div class="card">
+      {% for question in questions %}
+        <div class="question-block">
+          <div class="question-block__title">{{ question.text }}</div>
+
+          {# مقیاس لیکرت ۷تایی، استاندارد در TIPI #}
+          <div style="display:flex; justify-content:space-between; gap: var(--space-2);">
+            {% for i in "1234567" %}
+              <label style="display:flex; flex-direction:column; align-items:center; gap:var(--space-1); font-size: var(--fs-xs); cursor:pointer;">
+                <input type="radio"
+                       name="question_{{ question.id }}"
+                       value="{{ i }}"
+                       {% if question.answer_value == i %}checked{% endif %}>
+                {{ i }}
+              </label>
+            {% endfor %}
+          </div>
+          <div class="form-scale">
+            <span>کاملاً مخالفم</span>
+            <span>کاملاً موافقم</span>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    <div style="display:flex; justify-content:{% if is_onboarding %}space-between{% else %}flex-end{% endif %}; margin-top: var(--space-5);">
+      {% if is_onboarding %}
+        <button type="button" class="btn btn-outline" onclick="history.back()">قبلی</button>
+      {% endif %}
+      <button type="submit" class="btn btn-primary">
+        {% if is_editing %}ذخیره تغییرات{% else %}مشاهده پیشنهادها{% endif %}
+      </button>
+    </div>
+  </form>
+</div>
+{% endblock %}

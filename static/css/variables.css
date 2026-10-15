@@ -1,0 +1,79 @@
+/* ==========================================================================
+   متغیرهای سراسری طراحی
+   هر رنگ، فاصله، اندازه یا فونتی که در کل سایت تکرار می‌شود، اینجا تعریف شده.
+   برای تغییر ظاهر کل سایت، فقط همین فایل را ویرایش کنید.
+   ========================================================================== */
+
+:root {
+  /* ---------- رنگ‌های اصلی برند ---------- */
+  --color-primary: #1F4B43;        /* سبز-نفتی تیره — رنگ اصلی برند، هدر و دکمه‌های اصلی */
+  --color-primary-dark: #163830;   /* حالت hover دکمه‌های اصلی */
+  --color-primary-light: #DCE6DE;  /* زمینهٔ ملایم، کارت‌های ثانویه */
+
+  --color-accent: #C9982E;         /* طلایی/خردلی — نشان‌دهندهٔ امتیاز سازگاری و نکات مهم */
+  --color-accent-dark: #A87D22;
+
+  --color-bg: #FAF7F1;             /* زمینهٔ اصلی صفحه — کاغذی و گرم */
+  --color-surface: #FFFFFF;        /* زمینهٔ کارت‌ها و فرم‌ها */
+  --color-surface-alt: #F1ECE2;    /* زمینهٔ متناوب (مثلاً ردیف‌های جدول) */
+
+  --color-text: #2B2A28;           /* متن اصلی */
+  --color-text-muted: #6B6660;     /* متن کم‌رنگ‌تر، توضیحات */
+  --color-border: #E3DDD0;         /* خطوط جداکننده و border فرم‌ها */
+
+  --color-success: #3F7A5E;
+  --color-warning: #C9982E;
+  --color-danger: #B5533C;
+
+  /* ---------- سطوح سازگاری (برای نوار امتیاز) ---------- */
+  --color-compat-high: #1F4B43;    /* سازگاری بالا */
+  --color-compat-mid: #C9982E;     /* سازگاری متوسط */
+  --color-compat-low: #B5533C;     /* سازگاری پایین */
+
+  /* ---------- تایپوگرافی ---------- */
+  --font-main: "Vazirmatn", "Tahoma", sans-serif;
+
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.875rem;
+  --fs-base: 1rem;
+  --fs-md: 1.125rem;
+  --fs-lg: 1.375rem;
+  --fs-xl: 1.75rem;
+  --fs-xxl: 2.25rem;
+
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  --line-height-base: 1.8;
+  --line-height-tight: 1.35;
+
+  /* ---------- فاصله‌گذاری (spacing scale) ---------- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+
+  /* ---------- شعاع گوشه‌ها ---------- */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+
+  /* ---------- سایه‌ها ---------- */
+  --shadow-sm: 0 1px 3px rgba(43, 42, 40, 0.08);
+  --shadow-md: 0 4px 14px rgba(43, 42, 40, 0.10);
+
+  /* ---------- عرض محتوا ---------- */
+  --container-max: 1120px;
+  --container-narrow: 720px;
+
+  /* ---------- انتقال‌ها ---------- */
+  --transition-fast: 150ms ease;
+  --transition-base: 220ms ease;
+}

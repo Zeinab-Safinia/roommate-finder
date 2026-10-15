@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% comment %}
+  صفحهٔ تنظیمات پروفایل.
+  طبق تصمیم نهایی، این صفحه سه بخش داره:
+  ۱. اطلاعات خوابگاه/ساختمان/سنواتی (قابل ویرایش مستقیم همینجا)
+  ۲. لینک به ویرایش هر پرسش‌نامه (که میره روی همون تمپلیت‌های
+     questionnaire/lifestyle.html و personality.html، با is_editing=True)
+  ۳. لینک به تغییر رمز عبور
+
+  نکته مهم طبق طراحی پروژه: اگه خوابگاه عوض بشه، دانشجو باید از گروه فعلیش
+  (اگه عضو بود) خارج بشه چون دیگه تو همون استخر تطبیق نیست. این هشدار با
+  جاوااسکریپت قبل از ثبت فرم نمایش داده می‌شه (در extra_js پایین).
+{% endcomment %}
+
+{% block title %}پروفایل من | هم‌اتاقی‌یاب{% endblock %}
+{% block nav_profile %}is-active{% endblock %}
+
+{% block content %}
+
+<h2 style="margin-bottom: var(--space-6);">تنظیمات حساب</h2>
+
+{# ---------- بخش ۱: اطلاعات خوابگاه ---------- #}
+<div class="card" style="margin-bottom: var(--space-5);">
+  <h4 style="margin-bottom: var(--space-4);">اطلاعات خوابگاه</h4>
+
+  <form method="post" id="dormitory-form" action="{% url 'profile:update_dormitory' %}">
+    {% csrf_token %}
+
+    <div class="form-group">
+      <label class="form-label" for="id_dormitory">خوابگاه</label>
+      <select class="form-control" id="id_dormitory" name="dormitory">
+        <option value="sadaf" {% if current_dormitory == "sadaf" %}selected{% endif %}>صدف</option>
+        <option value="sadra" {% if current_dormitory == "sadra" %}selected{% endif %}>صدرا</option>
+        <option value="ghadir" {% if current_dormitory == "ghadir" %}selected{% endif %}>الغدیر</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="id_building">ساختمان (ترم جاری)</label>
+      <select class="form-control" id="id_building" name="building">
+        {% for b in available_buildings %}
+          <option value="{{ b.id }}" {% if b.id == current_building_id %}selected{% endif %}>
+            ساختمان شماره {{ b.number }}
+          </option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label style="display:flex; align-items:center; gap: var(--space-2); cursor:pointer;">
+        <input type="checkbox" name="is_senior" value="1" {% if is_senior %}checked{% endif %}>
+        <span>سنواتی هستم</span>
+      </label>
+    </div>
+
+    <button type="submit" class="btn btn-primary">ذخیره تغییرات</button>
+  </form>
+</div>
+
+{# ---------- بخش ۲: پرسش‌نامه‌ها ---------- #}
+<div class="card" style="margin-bottom: var(--space-5);">
+  <h4 style="margin-bottom: var(--space-3);">پرسش‌نامه سبک زندگی</h4>
+  <p class="text-muted" style="margin-bottom: var(--space-4);">آخرین‌بار {{ lifestyle_updated_at|default:"هنوز تکمیل نشده" }} به‌روزرسانی شده.</p>
+  <a href="{% url 'questionnaire:lifestyle' %}?edit=1" class="btn btn-outline btn-sm">ویرایش پرسش‌نامه</a>
+</div>
+
+<div class="card" style="margin-bottom: var(--space-5);">
+  <h4 style="margin-bottom: var(--space-3);">پرسش‌نامه شخصیتی</h4>
+  <p class="text-muted" style="margin-bottom: var(--space-4);">آخرین‌بار {{ personality_updated_at|default:"هنوز تکمیل نشده" }} به‌روزرسانی شده.</p>
+  <a href="{% url 'questionnaire:personality' %}?edit=1" class="btn btn-outline btn-sm">ویرایش پرسش‌نامه</a>
+</div>
+
+{# ---------- بخش ۳: رمز عبور ---------- #}
+<div class="card">
+  <h4 style="margin-bottom: var(--space-3);">رمز عبور</h4>
+  <a href="{% url 'profile:change_password' %}" class="btn btn-outline btn-sm">تغییر رمز عبور</a>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  // هشدار قبل از ذخیرهٔ تغییر خوابگاه: چون ممکنه عضو یه گروه فعلی باشه
+  document.getElementById('dormitory-form').addEventListener('submit', function (e) {
+    const confirmed = confirm('با تغییر خوابگاه یا ساختمان، در صورت عضویت در گروهی، از آن گروه خارج می‌شوید. ادامه می‌دهید؟');
+    if (!confirmed) e.preventDefault();
+  });
+</script>
+{% endblock %}

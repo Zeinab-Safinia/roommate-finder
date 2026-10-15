@@ -1,0 +1,97 @@
+/* ==========================================================================
+   پایه: ریست، تایپوگرافی، ساختار کلی صفحه
+   ========================================================================== */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-main);
+  font-size: var(--fs-base);
+  font-weight: var(--fw-regular);
+  line-height: var(--line-height-base);
+  color: var(--color-text);
+  background: var(--color-bg);
+  direction: rtl;
+  text-align: right;
+}
+
+h1, h2, h3, h4 {
+  margin: 0 0 var(--space-3);
+  font-weight: var(--fw-bold);
+  line-height: var(--line-height-tight);
+  color: var(--color-primary);
+}
+
+h1 { font-size: var(--fs-xxl); }
+h2 { font-size: var(--fs-xl); }
+h3 { font-size: var(--fs-lg); }
+h4 { font-size: var(--fs-md); }
+
+p {
+  margin: 0 0 var(--space-4);
+  color: var(--color-text);
+}
+
+.text-muted { color: var(--color-text-muted); }
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+a:hover { text-decoration: underline; }
+
+img { max-width: 100%; display: block; }
+
+ul, ol { margin: 0; padding-inline-start: var(--space-5); }
+
+/* ---------- ساختار صفحه ---------- */
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--space-5);
+}
+
+.container--narrow {
+  max-width: var(--container-narrow);
+}
+
+main {
+  flex: 1;
+  padding-block: var(--space-7);
+}
+
+/* ---------- فوکوس قابل‌مشاهده برای دسترس‌پذیری ---------- */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* ---------- کاهش انیمیشن برای کاربرانی که ترجیح می‌دهند ---------- */
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+
+/* ---------- ریسپانسیو پایه ---------- */
+@media (max-width: 640px) {
+  .container { padding-inline: var(--space-4); }
+  main { padding-block: var(--space-5); }
+  h1 { font-size: var(--fs-xl); }
+  h2 { font-size: var(--fs-lg); }
+}

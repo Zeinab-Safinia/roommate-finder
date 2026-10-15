@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% comment %}
+  جزئیات کامل یک گروه پیشنهادی — وقتی کاربر از داشبورد روی یه کارت کلیک می‌کنه میاد اینجا.
+  برخلاف کارت فشردهٔ داشبورد، اینجا دلایل سازگاری کامل‌تر توضیح داده می‌شه
+  و دکمه‌های عمل (درخواست عضویت / شروع چت) اصلی‌ترن.
+{% endcomment %}
+
+{% block title %}جزئیات گروه پیشنهادی{% endblock %}
+{% block nav_dashboard %}is-active{% endblock %}
+
+{% block content %}
+
+<a href="{% url 'groups:dashboard' %}" class="text-muted" style="display:inline-block; margin-bottom: var(--space-5);">← بازگشت به پیشنهادها</a>
+
+<div class="card" style="margin-bottom: var(--space-6);">
+  <div class="group-card__header" style="margin-bottom: var(--space-5);">
+    <div>
+      <h2 style="margin-bottom: var(--space-1);">گروه «سرو ۳»</h2>
+      <p class="text-muted" style="margin:0;">۳ از ۴ نفر تکمیل شده · خوابگاه صدف، ساختمان ۸</p>
+    </div>
+  </div>
+
+  {# نوار سازگاری کلی گروه، بزرگ‌تر از نسخهٔ کارت داشبورد #}
+  <div class="compat" data-level="high" style="margin-bottom: var(--space-6);">
+    <div class="compat-track"><div class="compat-fill" style="width: 91%;"></div></div>
+    <span class="compat-value" style="font-size: var(--fs-xl);">٪۹۱</span>
+  </div>
+
+  <h4>اعضای فعلی</h4>
+  <ul class="member-list" style="margin-bottom: var(--space-6);">
+    <li class="member-chip"><span class="member-chip__avatar">ن.ا</span> نگار ا.</li>
+    <li class="member-chip"><span class="member-chip__avatar">س.ب</span> سارا ب.</li>
+    <li class="member-chip"><span class="member-chip__avatar">م.ک</span> مریم ک.</li>
+    <li class="member-chip member-chip--empty">+ تو</li>
+  </ul>
+
+  <h4>چرا این گروه بهت پیشنهاد شده</h4>
+  <ul class="group-card__reasons" style="margin-bottom: var(--space-6);">
+    <li>ساعت خواب نزدیک به هم</li>
+    <li>حساسیت مشابه به سروصدا</li>
+    <li>سطح نزدیک نظم و نظافت</li>
+    <li>ترجیحات هماهنگ دربارهٔ پذیرش مهمان</li>
+  </ul>
+
+  <div class="group-card__actions">
+    <button class="btn btn-primary">درخواست عضویت</button>
+    <a href="{% url 'chat:room' room_id=1 %}" class="btn btn-outline">شروع گفت‌وگو با اعضا</a>
+  </div>
+</div>
+
+{% endblock %}

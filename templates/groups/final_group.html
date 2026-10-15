@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% comment %}
+  صفحهٔ گروه نهایی — وقتی گروه کامل شد (۴ یا ۵ نفر، بسته به سنواتی بودن)
+  و همهٔ اعضا تأیید کردن، این صفحه جایگزین کارت‌های پیشنهادی داشبورد می‌شه.
+  state این گروه دیگه "پیشنهادی" نیست، "نهایی‌شده"ست — برای همین المان‌های
+  متفاوتی داره (پیام تبریک، اطلاعات تماس اعضا برای هماهنگی ثبت واقعی اتاق).
+{% endcomment %}
+
+{% block title %}گروه نهایی من{% endblock %}
+{% block nav_dashboard %}is-active{% endblock %}
+
+{% block content %}
+
+<div class="card" style="text-align:center; margin-bottom: var(--space-6); background: var(--color-primary-light);">
+  <h2 style="margin-bottom: var(--space-2);">🎉 گروه شما تکمیل شد!</h2>
+  <p class="text-muted" style="margin:0;">
+    حالا می‌توانید با این اطلاعات، اتاق را در سامانهٔ خوابگاه دانشگاه ثبت کنید.
+  </p>
+</div>
+
+<div class="card">
+  <h4 style="margin-bottom: var(--space-4);">اعضای نهایی گروه</h4>
+
+  <div class="request-row">
+    <div class="request-row__info">
+      <span class="member-chip__avatar" style="width:36px;height:36px;">ن.ا</span>
+      <div>
+        <strong>نگار احمدی</strong>
+        <div class="text-muted" style="font-size: var(--fs-xs);">شماره دانشجویی: ۴۰۰۱۲۳۴۵۶۷</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="request-row">
+    <div class="request-row__info">
+      <span class="member-chip__avatar" style="width:36px;height:36px;">س.ب</span>
+      <div>
+        <strong>سارا بهرامی</strong>
+        <div class="text-muted" style="font-size: var(--fs-xs);">شماره دانشجویی: ۴۰۰۹۸۷۶۵۴۳</div>
+      </div>
+    </div>
+  </div>
+
+  <p class="text-muted" style="margin-top: var(--space-5);">
+    خوابگاه: صدف &nbsp;·&nbsp; ساختمان: ۸
+  </p>
+</div>
+
+{% endblock %}

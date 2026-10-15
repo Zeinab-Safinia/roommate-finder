@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% comment %}
+  انتخاب شماره ساختمان، مخصوص ترم جاری.
+  نکته مهم طبق طراحی پروژه: لیست شماره‌های خود خوابگاه ثابته (مثلاً صدف
+  همیشه ۷ تا ۱۰ داره)، ولی این‌که کدوم شماره برای این دانشجو در *این ترم*
+  مجازه، از بک‌اند میاد (context variable به اسم "available_buildings")
+  و باید هر ترم دوباره انتخاب بشه، نه یه‌بار برای همیشه.
+
+  گزینهٔ "سنواتی هستم" هم همینجاست چون مستقیم روی ظرفیت هدف گروه
+  (۴ نفره یا ۵ نفره) اثر می‌ذاره.
+{% endcomment %}
+
+{% block title %}انتخاب شماره ساختمان | هم‌اتاقی‌یاب{% endblock %}
+
+{% block content %}
+<div class="container container--narrow" style="padding: 0;">
+
+  {% if is_onboarding %}
+    <div class="progress-track">
+      <div class="progress-fill" style="width: 40%;"></div>
+    </div>
+    <p class="form-hint" style="margin-bottom: var(--space-6);">قدم ۲ از ۵</p>
+  {% endif %}
+
+  <h2>شماره ساختمان را انتخاب کن</h2>
+  <p class="text-muted" style="margin-bottom: var(--space-6);">
+    فقط شماره‌هایی که در ترم جاری برایت مجاز است نمایش داده می‌شود.
+  </p>
+
+  <form method="post">
+    {% csrf_token %}
+
+    <div class="form-group">
+      <label class="form-label" for="id_building">شماره ساختمان (ترم جاری)</label>
+      <select class="form-control" id="id_building" name="building" required>
+        <option value="" disabled selected>انتخاب کن</option>
+        {% comment %}
+          available_buildings از بک‌اند میاد: لیست شماره‌هایی که این دانشجو
+           در این ترم مجاز به ثبت‌نام در آن‌هاست 
+        {% endcomment %}
+        {% for b in available_buildings %}
+          <option value="{{ b.id }}" {% if b.id == current_building_id %}selected{% endif %}>
+            ساختمان شماره {{ b.number }}
+          </option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label style="display:flex; align-items:center; gap: var(--space-2); cursor:pointer;">
+        <input type="checkbox" name="is_senior" value="1" {% if is_senior %}checked{% endif %}>
+        <span>سنواتی هستم</span>
+      </label>
+      <p class="form-hint">
+        دانشجویان سنواتی در اتاق‌های پنج‌نفره اسکان می‌یابند و فقط با یکدیگر گروه تشکیل می‌دهند.
+      </p>
+    </div>
+
+    <button type="submit" class="btn btn-primary">ادامه</button>
+  </form>
+</div>
+{% endblock %}

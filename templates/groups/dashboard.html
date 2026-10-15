@@ -1,0 +1,180 @@
+{% extends "base.html" %}
+{% comment %}
+  داشبورد اصلی. کارت‌های گروه پیشنهادی رو فشرده نشون می‌ده.
+{% endcomment %}
+{% block title %}پیشنهادهای گروه{% endblock %}
+{% block nav_dashboard %}is-active{% endblock %}
+{% block content %}
+
+<div
+  style="
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: var(--space-6);
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  "
+>
+  <div>
+    <h2 style="margin-bottom: var(--space-2)">گروه پیشنهادی برای تو</h2>
+    <p class="text-muted" style="margin: 0">
+      بر اساس پرسش‌نامهٔ سبک زندگی‌ات، این گروه‌ها بیشترین سازگاری را دارند.
+    </p>
+  </div>
+  <a href="{% url 'questionnaire:lifestyle' %}" class="btn btn-outline btn-sm"
+    >ویرایش پروفایل سبک زندگی</a
+  >
+</div>
+
+<!-- وضعیت فعلی کاربر -->
+<div
+  class="card"
+  style="
+    margin-bottom: var(--space-7);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+  "
+>
+  <div>
+    <h4 style="margin-bottom: var(--space-1)">وضعیت فعلی تو</h4>
+    <p class="text-muted" style="margin: 0">
+      در حال حاضر عضو هیچ گروهی نیستی — یکی از گروه‌های زیر رو انتخاب کن یا
+      منتظر دعوت بمان.
+    </p>
+  </div>
+  <span class="badge badge-pending">در جست‌وجوی گروه</span>
+</div>
+
+<h3 style="margin-bottom: var(--space-5)">گروه‌های ناقص سازگار با تو</h3>
+
+<div class="group-grid">
+  <!-- گروه پیشنهادی ۱ -->
+  <div class="group-card">
+    <div class="group-card__header">
+      <div>
+        <p class="group-card__title">گروه سه‌نفرهٔ «سرو ۳»</p>
+        <p class="group-card__meta">۳ از ۴ نفر تکمیل شده · خوابگاه شماره ۱</p>
+      </div>
+    </div>
+
+    <ul class="member-list">
+      <li class="member-chip">
+        <span class="member-chip__avatar">ن.ا</span> نگار ا.
+      </li>
+      <li class="member-chip">
+        <span class="member-chip__avatar">س.ب</span> سارا ب.
+      </li>
+      <li class="member-chip">
+        <span class="member-chip__avatar">م.ک</span> مریم ک.
+      </li>
+      <li class="member-chip member-chip--empty">+ تو</li>
+    </ul>
+
+    <div class="compat" data-level="high">
+      <div class="compat-track">
+        <div class="compat-fill" style="width: 91%"></div>
+      </div>
+      <span class="compat-value">٪۹۱</span>
+    </div>
+
+    <ul class="group-card__reasons">
+      <li>ساعت خواب نزدیک به هم</li>
+      <li>حساسیت مشابه به سروصدا</li>
+      <li>سطح نزدیک نظم و نظافت</li>
+    </ul>
+
+    <div class="group-card__actions">
+      <button class="btn btn-primary btn-block">درخواست عضویت</button>
+    </div>
+  </div>
+
+  <!-- گروه پیشنهادی ۲ -->
+  <div class="group-card">
+    <div class="group-card__header">
+      <div>
+        <p class="group-card__title">گروه دونفرهٔ «یاس ۷»</p>
+        <p class="group-card__meta">۲ از ۴ نفر تکمیل شده · خوابگاه شماره ۱</p>
+      </div>
+    </div>
+
+    <ul class="member-list">
+      <li class="member-chip">
+        <span class="member-chip__avatar">ز.ح</span> زهرا ح.
+      </li>
+      <li class="member-chip">
+        <span class="member-chip__avatar">ف.ت</span> فاطمه ت.
+      </li>
+      <li class="member-chip member-chip--empty">+ تو</li>
+      <li class="member-chip member-chip--empty">+ ۱ نفر دیگر</li>
+    </ul>
+
+    <div class="compat" data-level="mid">
+      <div class="compat-track">
+        <div class="compat-fill" style="width: 74%"></div>
+      </div>
+      <span class="compat-value">٪۷۴</span>
+    </div>
+
+    <ul class="group-card__reasons">
+      <li>ترجیحات نزدیک درباره مهمان</li>
+      <li>تفاوت جزئی در ساعت مطالعه</li>
+    </ul>
+
+    <div class="group-card__actions">
+      <button class="btn btn-primary btn-block">درخواست عضویت</button>
+    </div>
+  </div>
+
+  <!-- گروه با سازگاری پایین -->
+  <div class="group-card">
+    <div class="group-card__header">
+      <div>
+        <p class="group-card__title">گروه سه‌نفرهٔ «بنفشه ۲»</p>
+        <p class="group-card__meta">۳ از ۴ نفر تکمیل شده · خوابگاه شماره ۲</p>
+      </div>
+    </div>
+
+    <ul class="member-list">
+      <li class="member-chip">
+        <span class="member-chip__avatar">ا.ص</span> الهام ص.
+      </li>
+      <li class="member-chip">
+        <span class="member-chip__avatar">پ.ن</span> پریسا ن.
+      </li>
+      <li class="member-chip">
+        <span class="member-chip__avatar">ط.م</span> طاهره م.
+      </li>
+      <li class="member-chip member-chip--empty">+ تو</li>
+    </ul>
+
+    <div class="compat" data-level="low">
+      <div class="compat-track">
+        <div class="compat-fill" style="width: 38%"></div>
+      </div>
+      <span class="compat-value">٪۳۸</span>
+    </div>
+
+    <ul class="group-card__reasons">
+      <li>اختلاف زیاد در ساعت خواب</li>
+      <li>حساسیت متفاوت به سروصدا</li>
+    </ul>
+
+    <div class="group-card__actions">
+      <button class="btn btn-outline btn-block">درخواست عضویت</button>
+    </div>
+  </div>
+</div>
+{% comment %} حالتی که هیچ گروه سازگاری پیدا نشد {% endcomment %}
+{% if not groups %}
+<div class="empty-state" style="display: none">
+  <h3>فعلاً گروه سازگاری پیدا نشد</h3>
+  <p>
+    به‌محض ثبت‌نام دانشجویان بیشتر، پیشنهادهای جدید اینجا نمایش داده می‌شود.
+  </p>
+</div>
+{% endif %}
+{% endblock %}

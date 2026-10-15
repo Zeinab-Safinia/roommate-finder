@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% comment %}
+  صفحهٔ ثبت‌نام.
+  نکته مهم: اینجا دیگه فیلد جنسیت یا خوابگاه نیست — چون طبق طراحی پروژه،
+  انتخاب خوابگاه (که خودش جنسیت رو هم ضمنی مشخص می‌کنه) یه قدم جدا بعد از
+  ثبت‌نام، تو مسیر onboarding انجام می‌شه، نه همینجا.
+
+  همچنین به‌جای تأیید پیامکی، از رمز عبور دلخواه + سؤال امنیتی استفاده شده
+  (طبق تصمیمی که برای رایگان‌ موندن پروژه گرفتیم).
+{% endcomment %}
+
+{% block title %}ثبت‌نام | هم‌اتاقی‌یاب{% endblock %}
+
+{% block content %}
+<div class="auth-card card">
+  <h2>ساخت حساب جدید</h2>
+  <p class="text-muted">اطلاعات اولیه رو وارد کن، بعد می‌ریم سراغ انتخاب خوابگاه و پرسش‌نامه‌ها.</p>
+
+  <form method="post" novalidate>
+    {% csrf_token %}
+
+    <div class="form-group">
+      <label class="form-label" for="id_full_name">نام و نام خانوادگی</label>
+      <input class="form-control" type="text" id="id_full_name" name="full_name" required>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="id_student_id">شماره دانشجویی</label>
+      <input class="form-control" type="text" id="id_student_id" name="student_id" required>
+      <p class="form-hint">این شماره به‌عنوان نام کاربری (username) برای ورود استفاده می‌شود.</p>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="id_password">رمز عبور</label>
+      <input class="form-control" type="password" id="id_password" name="password" required>
+      <p class="form-hint">این رمز متفاوت و مستقل از شماره دانشجویی است.</p>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="id_password_confirm">تکرار رمز عبور</label>
+      <input class="form-control" type="password" id="id_password_confirm" name="password_confirm" required>
+    </div>
+
+    {# سؤال امنیتی برای بازیابی رمز، جایگزین تأیید پیامکی #}
+    <div class="form-group">
+      <label class="form-label" for="id_security_question">یک سؤال امنیتی دلخواه بنویس</label>
+      <input class="form-control" type="text" id="id_security_question" name="security_question"
+             placeholder="مثلاً: نام اولین مدرسه‌ام؟" required>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="id_security_answer">پاسخ سؤال امنیتی</label>
+      <input class="form-control" type="text" id="id_security_answer" name="security_answer" required>
+      <p class="form-hint">در صورت فراموشی رمز عبور، با پاسخ‌دادن به همین سؤال می‌توانی رمز جدید تعیین کنی.</p>
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-block">ثبت‌نام و ادامه</button>
+  </form>
+
+  <p class="text-muted" style="margin-top: var(--space-5); text-align: center;">
+    قبلاً ثبت‌نام کردی؟ <a href="{% url 'accounts:login' %}">وارد شو</a>
+  </p>
+</div>
+{% endblock %}

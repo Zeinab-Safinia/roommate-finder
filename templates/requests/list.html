@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{# لیست درخواست‌های عضویت — هم دریافتی (که باید تأیید/رد کنی) هم ارسالی (که منتظر پاسخ دیگرانی) #}
+{% block title %}درخواست‌های عضویت{% endblock %}
+{% block nav_requests %}is-active{% endblock %}
+
+{% block content %}
+<h2>درخواست‌های عضویت</h2>
+<p class="text-muted" style="margin-bottom: var(--space-6);">درخواست‌هایی که برای عضویت در گروه فرستاده‌ای یا برایت ارسال شده.</p>
+
+<h3>درخواست‌های دریافتی</h3>
+<div class="request-row">
+  <div class="request-row__info">
+    <span class="member-chip__avatar" style="width:36px;height:36px;">ن.ا</span>
+    <div>
+      <strong>نگار احمدی</strong> می‌خواهد به گروه «سرو ۳» بپیوندد
+      <div class="compat" data-level="high" style="margin-top:var(--space-2); max-width:200px;">
+        <div class="compat-track"><div class="compat-fill" style="width:91%;"></div></div>
+        <span class="compat-value">٪۹۱</span>
+      </div>
+    </div>
+  </div>
+  <div class="request-row__actions">
+    <button class="btn btn-primary btn-sm">تأیید</button>
+    <button class="btn btn-danger-outline btn-sm">رد</button>
+  </div>
+</div>
+
+<h3 style="margin-top: var(--space-7);">درخواست‌های ارسالی</h3>
+<div class="request-row">
+  <div class="request-row__info">
+    <div>
+      درخواست عضویت در گروه «یاس ۷»
+      <div class="text-muted" style="font-size: var(--fs-xs); margin-top: var(--space-1);">در انتظار تأیید سایر اعضا</div>
+    </div>
+  </div>
+  <span class="badge badge-pending">در انتظار</span>
+</div>
+
+<div class="request-row">
+  <div class="request-row__info">
+    <div>
+      درخواست عضویت در گروه «بنفشه ۲»
+      <div class="text-muted" style="font-size: var(--fs-xs); margin-top: var(--space-1);">رد شده توسط اعضای گروه</div>
+    </div>
+  </div>
+  <span class="badge badge-rejected">رد شد</span>
+</div>
+{% endblock %}

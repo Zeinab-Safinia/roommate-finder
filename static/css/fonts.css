@@ -1,0 +1,53 @@
+/* ==========================================================================
+   تعریف فونت فارسی (Vazirmatn)
+   ==========================================================================
+   این پروژه با فونت «وزیرمتن» (Vazirmatn) طراحی شده — یه فونت فارسی رایگان
+   و متن‌باز که برای وب مناسبه.
+
+   دو روش برای استفاده ازش داری:
+
+   روش ۱ (پیش‌فرض الان، نیاز به اینترنت دارد):
+   در base.html یه لینک به نسخهٔ آنلاین فونت از CDN اضافه شده. یعنی فعلاً
+   بدون این‌که کاری بکنی، فونت لود می‌شه، به شرطی که کاربر اینترنت داشته باشه.
+
+   روش ۲ (پیشنهادی برای نسخهٔ نهایی/ارائه، آفلاین هم کار می‌کنه):
+   فایل‌های فونت رو خودت دانلود کن و اینجا (static/fonts/) بذار، بعد
+   کامنت‌های پایین همین فایل رو باز کن (/* و */ رو حذف کن) تا از نسخهٔ
+   محلی استفاده بشه. همچنین باید لینک CDN رو از base.html حذف کنی تا
+   دوباره‌کاری نشه.
+
+   از کجا دانلود کنم؟
+   https://github.com/rastikerdar/vazirmatn/releases
+   از پوشهٔ "fonts/webfonts" سه فایل زیر رو بردار (فرمت woff2، سبک‌تر و برای
+   مرورگرهای جدید کافیه):
+   - Vazirmatn-Regular.woff2
+   - Vazirmatn-Medium.woff2
+   - Vazirmatn-Bold.woff2
+   و داخل همین پوشهٔ static/fonts/ کپی کن.
+   ========================================================================== */
+
+/*
+@font-face {
+  font-family: "Vazirmatn";
+  src: url("../fonts/Vazirmatn-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Vazirmatn";
+  src: url("../fonts/Vazirmatn-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Vazirmatn";
+  src: url("../fonts/Vazirmatn-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+*/

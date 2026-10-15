@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% comment %}
+  پرسش‌نامهٔ سبک زندگی.
+  نکته مهم: متن سؤال‌ها اینجا هاردکد نیست! از بک‌اند میاد (مدل Question با
+  category="lifestyle") و با حلقه رندر می‌شه. دلیلش اینه که وزن هر سؤال هم
+  تو همون جدول دیتابیسه، پس اگه بعداً وزن‌ها رو با داده کالیبره کردیم یا
+  یه سؤال جدید اضافه کردیم، کافیه دیتابیس عوض بشه، نیازی به تغییر این
+  فایل HTML نیست.
+
+  این یک تمپلیت برای دو حالت است:
+  - پر کردن اول (is_editing=False): فیلدها خالی، پیام "برای دیدن پیشنهادها کامل کن"
+  - ویرایش بعدی (is_editing=True): فیلدها با answer.value قبلی پر می‌شن،
+    پیام "پاسخ‌هایت را به‌روزرسانی کن"
+  این متغیرها (is_editing, questions که هرکدوم answer هم داره) از ویو میان.
+{% endcomment %}
+
+{% block title %}پرسش‌نامه سبک زندگی | هم‌اتاقی‌یاب{% endblock %}
+
+{% block content %}
+<div class="container container--narrow" style="padding: 0;">
+
+  {% if is_onboarding %}
+    <div class="progress-track">
+      <div class="progress-fill" style="width: 75%;"></div>
+    </div>
+    <p class="form-hint" style="margin-bottom: var(--space-6);">قدم ۴ از ۵</p>
+  {% endif %}
+
+  <h2>پرسش‌نامه سبک زندگی</h2>
+
+  {% if is_editing %}
+    <p class="text-muted">پاسخ‌هایت را می‌توانی هر وقت خواستی به‌روزرسانی کنی.</p>
+  {% else %}
+    <p class="text-muted">
+      پاسخ‌های تو فقط برای محاسبهٔ سازگاری با سایر دانشجویان استفاده می‌شود
+      و برای هیچ‌کس دیگری نمایش داده نمی‌شود.
+    </p>
+  {% endif %}
+
+  <form method="post">
+    {% csrf_token %}
+
+    <div class="card">
+      {# هر سؤال از دیتابیس میاد؛ question.answer_value اگه ویرایشه مقدار قبلی رو داره، وگرنه خالیه #}
+      {% for question in questions %}
+        <div class="question-block">
+          <div class="question-block__title">{{ question.text }}</div>
+          <input type="range" class="form-range"
+                 name="question_{{ question.id }}"
+                 min="0" max="10"
+                 value="{{ question.answer_value|default:5 }}">
+          <div class="form-scale">
+            <span>{{ question.low_label }}</span>
+            <span>{{ question.high_label }}</span>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    <div style="display:flex; justify-content:{% if is_onboarding %}space-between{% else %}flex-end{% endif %}; margin-top: var(--space-5);">
+      {% if is_onboarding %}
+        <button type="button" class="btn btn-outline" onclick="history.back()">قبلی</button>
+      {% endif %}
+      <button type="submit" class="btn btn-primary">
+        {% if is_editing %}ذخیره تغییرات{% else %}ادامه{% endif %}
+      </button>
+    </div>
+  </form>
+</div>
+{% endblock %}

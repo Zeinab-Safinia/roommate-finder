@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% comment %}
+  انتخاب خوابگاه (صدف / صدرا / الغدیر).
+  چون هر خوابگاه فقط مخصوص یک جنسیت است، همین انتخاب به‌طور ضمنی جداسازی
+  دختر/پسر را هم انجام می‌دهد — نیازی به فیلد جنسیت جدا نیست.
+
+  این صفحه دو کاربرد داره: هم تو مسیر اولیهٔ ثبت‌نام (onboarding) استفاده
+  می‌شه، هم وقتی کاربر از پروفایل بخواد خوابگاهش رو عوض کنه. برای همین با
+  یه متغیر "current_dormitory" مقدار فعلی (اگه وجود داشته باشه) هایلایت
+  می‌شه.
+{% endcomment %}
+
+{% block title %}انتخاب خوابگاه | هم‌اتاقی‌یاب{% endblock %}
+
+{% block content %}
+<div class="container container--narrow" style="padding: 0;">
+
+  {# نشانگر مراحل، فقط در مسیر ثبت‌نام اولیه نمایش داده می‌شه #}
+  {% if is_onboarding %}
+    <div class="progress-track">
+      <div class="progress-fill" style="width: 20%;"></div>
+    </div>
+    <p class="form-hint" style="margin-bottom: var(--space-6);">قدم ۱ از ۵</p>
+  {% endif %}
+
+  <h2>خوابگاهت را انتخاب کن</h2>
+  <p class="text-muted" style="margin-bottom: var(--space-6);">
+    پیشنهادهای هم‌اتاقی فقط بین دانشجویان همین خوابگاه ساخته می‌شود.
+  </p>
+
+  <form method="post">
+    {% csrf_token %}
+
+    <div class="group-grid">
+
+      <label class="card" style="cursor:pointer; display:block;">
+        <input type="radio" name="dormitory" value="sadaf"
+               {% if current_dormitory == "sadaf" %}checked{% endif %}
+               style="margin-left: var(--space-2);">
+        <strong>خوابگاه صدف</strong>
+        <p class="text-muted" style="margin:var(--space-2) 0 0;">مخصوص دانشجویان دختر</p>
+      </label>
+
+      <label class="card" style="cursor:pointer; display:block;">
+        <input type="radio" name="dormitory" value="sadra"
+               {% if current_dormitory == "sadra" %}checked{% endif %}
+               style="margin-left: var(--space-2);">
+        <strong>خوابگاه صدرا</strong>
+        <p class="text-muted" style="margin:var(--space-2) 0 0;">مخصوص دانشجویان پسر</p>
+      </label>
+
+      <label class="card" style="cursor:pointer; display:block;">
+        <input type="radio" name="dormitory" value="ghadir"
+               {% if current_dormitory == "ghadir" %}checked{% endif %}
+               style="margin-left: var(--space-2);">
+        <strong>خوابگاه الغدیر</strong>
+        <p class="text-muted" style="margin:var(--space-2) 0 0;">مخصوص دانشجویان پسر</p>
+      </label>
+
+    </div>
+
+    <button type="submit" class="btn btn-primary" style="margin-top: var(--space-6);">ادامه</button>
+  </form>
+</div>
+{% endblock %}

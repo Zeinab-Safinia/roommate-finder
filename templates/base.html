@@ -1,0 +1,86 @@
+{% load static %}
+<!DOCTYPE html>
+{# قالب اصلی سایت — تمام صفحات دیگر از این فایل ارث می‌برن (extends) #}
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  {# عنوان هر صفحه در خود همان صفحه بازنویسی می‌شود؛ این‌جا فقط مقدار پیش‌فرضه #}
+  <title>{% block title %}هم‌اتاقی‌یاب{% endblock %}</title>
+
+  {% comment %}
+    --- فونت فارسی وزیرمتن، نسخهٔ آنلاین (CDN) ---
+    اگه فونت رو محلی کردی، این دو خط لینک رو حذف کن.
+  {% endcomment %}
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
+
+  {% comment %}
+    --- فایل‌های CSS پروژه ---
+    variables.css اول لود می‌شه چون بقیه فایل‌ها به متغیرهاش نیاز دارن.
+  {% endcomment %}
+  <link rel="stylesheet" href="{% static 'css/variables.css' %}">
+  <link rel="stylesheet" href="{% static 'css/fonts.css' %}">
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+  <link rel="stylesheet" href="{% static 'css/components.css' %}">
+
+  {# هر صفحه می‌تونه CSS اضافه و مخصوص خودش رو این‌جا اضافه کنه #}
+  {% block extra_css %}{% endblock %}
+</head>
+<body>
+  <div class="page">
+
+    {# ---------- هدر سایت ---------- #}
+    <header class="site-header">
+      <div class="container">
+        <!-- <a href="{% url 'groups:dashboard' %}" class="brand">
+          <span class="brand-mark">هم</span>
+          هم‌اتاقی‌یاب
+        </a> -->
+
+        <nav class="main-nav">
+          {% if user.is_authenticated %}
+            {# هر بلوک nav_xxx در صفحهٔ مربوطه با "is-active" پر می‌شه تا لینک فعلی هایلایت بشه #}
+            <a href="{% url 'groups:dashboard' %}" class="{% block nav_dashboard %}{% endblock %}">پیشنهادها</a>
+            <a href="{% url 'requests:list' %}" class="{% block nav_requests %}{% endblock %}">درخواست‌ها</a>
+            <a href="{% url 'profile:settings' %}" class="{% block nav_profile %}{% endblock %}">پروفایل من</a>
+            <a href="{% url 'accounts:logout' %}">خروج</a>
+          {% else %}
+            <a href="{% url 'accounts:login' %}">ورود</a>
+            <a href="{% url 'accounts:register' %}" class="btn btn-accent btn-sm">ثبت‌نام</a>
+          {% endif %}
+        </nav>
+      </div>
+    </header>
+
+    {# ---------- محتوای اصلی هر صفحه ---------- #}
+    <main>
+      <div class="container">
+        {# پیام‌های سیستمی جنگو (مثل "با موفقیت ذخیره شد") این‌جا نمایش داده می‌شن #}
+        {% if messages %}
+          {% for message in messages %}
+            <div class="alert alert-{{ message.tags|default:'info' }}">{{ message }}</div>
+          {% endfor %}
+        {% endif %}
+
+        {# محتوای اصلی هر صفحه این‌جا جایگزین می‌شه #}
+        {% block content %}{% endblock %}
+      </div>
+    </main>
+
+    {# ---------- فوتر سایت ---------- #}
+    <footer class="site-footer">
+      <div class="container">
+        <span>سامانه هم‌اتاقی‌یاب خوابگاه — پروژه کارشناسی</span>
+        <span>داده‌ها محرمانه و صرفاً برای پیشنهاد گروه استفاده می‌شوند</span>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src="{% static 'js/main.js' %}"></script>
+  {# هر صفحه می‌تونه جاوااسکریپت اضافه و مخصوص خودش رو این‌جا اضافه کنه #}
+  {% block extra_js %}{% endblock %}
+</body>
+</html>

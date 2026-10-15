@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% comment %}
+  وضعیت گروهی فعلی دانشجو.
+  این اطلاعات مستقیم به الگوریتم پیشنهاد می‌گه دنبال چه نوع تکمیلی بگرده.
+  ظرفیت هدف بسته به سنواتی بودن (از قدم قبل) فرق می‌کنه: عادی = ۴ نفر،
+  سنواتی = ۵ نفر. عدد "target_capacity" از بک‌اند میاد.
+{% endcomment %}
+
+{% block title %}وضعیت گروهی | هم‌اتاقی‌یاب{% endblock %}
+
+{% block content %}
+<div class="container container--narrow" style="padding: 0;">
+
+  {% if is_onboarding %}
+    <div class="progress-track">
+      <div class="progress-fill" style="width: 60%;"></div>
+    </div>
+    <p class="form-hint" style="margin-bottom: var(--space-6);">قدم ۳ از ۵</p>
+  {% endif %}
+
+  <h2>الان وضعیتت چجوریه؟</h2>
+  <p class="text-muted" style="margin-bottom: var(--space-6);">
+    ظرفیت هدف گروه شما {{ target_capacity }} نفر است.
+  </p>
+
+  <form method="post">
+    {% csrf_token %}
+
+    <div class="card" style="margin-bottom: var(--space-4);">
+      <label style="display:flex; align-items:center; gap: var(--space-3); cursor:pointer;">
+        <input type="radio" name="group_status" value="alone">
+        <div>
+          <strong>تنها هستم</strong>
+          <p class="text-muted" style="margin:0;">به {{ target_capacity|add:"-1" }} نفر دیگر نیاز دارم</p>
+        </div>
+      </label>
+    </div>
+
+    <div class="card" style="margin-bottom: var(--space-4);">
+      <label style="display:flex; align-items:center; gap: var(--space-3); cursor:pointer;">
+        <input type="radio" name="group_status" value="partial">
+        <div>
+          <strong>از قبل با چند نفر هماهنگ شده‌ام</strong>
+          <p class="text-muted" style="margin:0;">تعداد نفرات فعلی گروهمان را مشخص می‌کنم</p>
+        </div>
+      </label>
+
+      {# این بخش فقط وقتی گزینه بالا انتخاب بشه با جاوااسکریپت نمایش داده می‌شه #}
+      <div class="form-group" style="margin-top: var(--space-4); margin-right: var(--space-6);">
+        <label class="form-label" for="id_current_members">تعداد نفرات فعلی گروه (شامل خودت)</label>
+        <select class="form-control" id="id_current_members" name="current_members">
+          {% for n in group_size_options %}
+            <option value="{{ n }}">{{ n }} نفر</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">ادامه به پرسش‌نامه‌ها</button>
+  </form>
+</div>
+{% endblock %}
