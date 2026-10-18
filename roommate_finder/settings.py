@@ -131,3 +131,14 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+from django.contrib.messages import constants as message_constants
+
+AUTH_USER_MODEL = "accounts.User"
+
+LOGIN_URL = "accounts:login"
+LOGIN_REDIRECT_URL = "groups:dashboard"
+LOGOUT_REDIRECT_URL = "accounts:login"
+
+# پیام‌های خطا با کلاس alert-danger (که تو CSS تعریف شده) نمایش داده بشن
+MESSAGE_TAGS = {message_constants.ERROR: "danger"}
