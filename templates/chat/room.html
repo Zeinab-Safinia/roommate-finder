@@ -1,10 +1,11 @@
+{% extends "base.html" %}
 {% comment %}
   چت‌روم بین اعضای یک گروه پیشنهادی.
   این فقط ظاهره — اتصال واقعی WebSocket (با Django Channels) باید در
   extra_js پایین همین فایل اضافه بشه. الان main.js یه شبیه‌سازی ساده
   (append کردن پیام به لیست) داره فقط برای تست ظاهر.
 {% endcomment %}
-{% extends "base.html" %}
+
 {% block title %}گفتگو با گروه «سرو ۳»{% endblock %}
 
 {% block content %}
