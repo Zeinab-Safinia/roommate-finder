@@ -53,6 +53,12 @@
       <input class="form-control" type="text" id="id_security_answer" name="security_answer" required>
       <p class="form-hint">در صورت فراموشی رمز عبور، با پاسخ‌دادن به همین سؤال می‌توانی رمز جدید تعیین کنی.</p>
     </div>
+    {% if form.errors %}
+    <div class="alert alert-danger">
+      {% for field in form %}{% for error in field.errors %}<div>{{ error }}</div>{% endfor %}{% endfor %}
+      {% for error in form.non_field_errors %}<div>{{ error }}</div>{% endfor %}
+    </div>
+    {% endif %}
 
     <button type="submit" class="btn btn-primary btn-block">ثبت‌نام و ادامه</button>
   </form>

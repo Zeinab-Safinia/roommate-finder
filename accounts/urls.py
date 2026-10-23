@@ -1,12 +1,13 @@
+from django.contrib.auth.views import LogoutView
 from django.urls import path
-from django.views.generic import TemplateView
+
+from . import views
 
 app_name = "accounts"
 
 urlpatterns = [
-    path("login/", TemplateView.as_view(template_name="accounts/login.html"), name="login"),
-    path("register/", TemplateView.as_view(template_name="accounts/register.html"), name="register"),
-    path("password-reset/", TemplateView.as_view(template_name="accounts/password_reset.html"), name="password_reset"),
-    # موقت: بعداً با LogoutView واقعی جایگزین می‌شه
-    path("logout/", TemplateView.as_view(template_name="accounts/login.html"), name="logout"),
+    path("login/", views.login_view, name="login"),
+    path("register/", views.register_view, name="register"),
+    path("logout/", LogoutView.as_view(), name="logout"),
+    path("password-reset/", views.password_reset_view, name="password_reset"),
 ]
